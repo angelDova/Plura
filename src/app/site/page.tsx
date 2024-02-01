@@ -72,7 +72,7 @@ export default function Home() {
               <CardFooter className="flex flex-col items-start gap-4">
                 <div className="">
                   {card.features.map((feature) => (
-                    <div className="felx gap-2 items-center" key={feature}>
+                    <div className="flex gap-2 items-center" key={feature}>
                       <Check className="text-muted-foreground" />
                       <p className="">{feature}</p>
                     </div>
