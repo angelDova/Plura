@@ -1,6 +1,6 @@
 "use server";
 
-import { currentUser } from "@clerk/nextjs";
+import { clerkClient, currentUser } from "@clerk/nextjs";
 import { db } from "./db";
 import { redirect } from "next/navigation";
 import { User } from "@prisma/client";
@@ -39,7 +39,7 @@ export const saveActivyLogsNotification = async ({
 }: {
   agencyId?: string;
   description: string;
-  subaccountId: string;
+  subaccountId: string | undefined;
 }) => {
   const authUser = await currentUser();
   let userData;
@@ -103,5 +103,33 @@ export const verifyAndAcceptInvitation = async () => {
       createdAt: new Date(),
       updatedAt: new Date(),
     });
+    await saveActivyLogsNotification({
+      agencyId: invitationExists?.agencyId,
+      description: `Joined`,
+      subaccountId: undefined,
+    });
+
+    if (userDetails) {
+      await clerkClient.users.updateUserMetadata(user.id, {
+        privateMetadata: {
+          role: userDetails.role || "SUBACCOUNT_USER",
+        },
+      });
+
+      await db.invitation.delete({
+        where: {
+          email: userDetails.email,
+        },
+      });
+
+      return userDetails.agencyId;
+    } else return null;
+  } else {
+    const agency = await db.user.findUnique({
+      where: {
+        email: user.emailAddresses[0].emailAddress,
+      },
+    });
+    return agency ? agency.agencyId : null;
   }
 };
