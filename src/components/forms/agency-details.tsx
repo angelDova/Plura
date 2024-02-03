@@ -15,7 +15,17 @@ import {
 } from "../ui/card";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
-import { Form, FormControl, FormField, FormItem, FormLabel } from "../ui/form";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "../ui/form";
+import FileUpload from "../global/file-upload";
+import { Input } from "../ui/input";
 
 type Props = {
   data?: Partial<Agency>;
@@ -89,11 +99,32 @@ const AgencyDetails = ({ data }: Props) => {
                   <FormItem>
                     <FormLabel>Agency Logo</FormLabel>
                     <FormControl>
-                      <FileUpload></FileUpload>
+                      <FileUpload
+                        apiEndpoint="agencyLogo"
+                        onChange={field.onChange}
+                        value={field.value}
+                      />
                     </FormControl>
+
+                    <FormMessage />
                   </FormItem>
                 )}
-              ></FormField>
+              />
+              <div className="felx md:flex-row gap-4">
+                <FormField
+                  disabled={isLoading}
+                  control={form.control}
+                  name="name"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Agency Name</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Your Agency Name" {...field} />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                ></FormField>
+              </div>
             </form>
           </Form>
         </CardContent>
