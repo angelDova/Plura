@@ -50,6 +50,7 @@ import { Button } from "../ui/button";
 import { Loader2 } from "lucide-react";
 import { Toast } from "../ui/toast";
 import { useToast } from "../ui/use-toast";
+import { v4 } from "uuid";
 
 type Props = {
   data?: Partial<Agency>;
@@ -124,44 +125,42 @@ const AgencyDetails = ({ data }: Props) => {
           },
         };
 
-      //   const customerResponse = await fetch("/api/stripe/create-customer", {
-      //     method: "POST",
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //     },
-      //     body: JSON.stringify(bodyData),
-      //   });
-      //   const customerData: { customerId: string } =
-      //     await customerResponse.json();
-      //   custId = customerData.customerId;
-      // }
+        // const customerResponse = await fetch("/api/stripe/create-customer", {
+        //   method: "POST",
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //   },
+        //   body: JSON.stringify(bodyData),
+        // });
+        // const customerData: { customerId: string } =
+        //   await customerResponse.json();
+        // custId = customerData.customerId;
+      }
 
-      // WIP: Cust.Id
       newUserData = await initUser({ role: "AGENCY_OWNER" });
-      if (!data?.customerId) return;
-
-      const response = await upsertAgency({
-        id: data?.id ? data.id : v4(),
-        customerId: data?.customerId || custId || "",
-        address: values.address,
-        agencyLogo: values.agencyLogo,
-        city: values.city,
-        companyPhone: values.companyPhone,
-        country: values.country,
-        name: values.name,
-        state: values.state,
-        whiteLabel: values.whiteLabel,
-        zipCode: values.zipCode,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-        companyEmail: values.companyEmail,
-        connectAccountId: "",
-        goal: 5,
-      });
-      toast.success("Created Agency");
-      if (data?.id) return router.refresh();
-      if (response) {
-        return router.refresh();
+      if (!data?.id) {
+        const response = await upsertAgency({
+          id: data?.id ? data.id : v4(),
+          address: values.address,
+          agencyLogo: values.agencyLogo,
+          city: values.city,
+          companyPhone: values.companyPhone,
+          country: values.country,
+          name: values.name,
+          state: values.state,
+          whiteLabel: values.whiteLabel,
+          zipCode: values.zipCode,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+          companyEmail: values.companyEmail,
+          connectAccountId: "",
+          goal: 5,
+        });
+        toast("Created Agency");
+        if (data?.id) return router.refresh();
+        if (response) {
+          return router.refresh();
+        }
       }
     } catch (error) {
       console.log(error);
