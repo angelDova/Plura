@@ -1,13 +1,10 @@
-import UnauthorizedPage from "@/components/unauthorized";
+import Unauthorized from "@/components/unauthorized";
+import React from "react";
 
 type Props = {};
 
-const Unauthorized = () => {
-  return (
-    <div>
-      <UnauthorizedPage />
-    </div>
-  );
+const Page = (props: Props) => {
+  return <Unauthorized />;
 };
 
-export default Unauthorized;
+export default Page;
