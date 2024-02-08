@@ -50,6 +50,7 @@ const MenuOptions = ({
 }: MenuOptionsProps) => {
   const { setOpen } = useModal();
   const [isMounted, setIsMounted] = useState(false);
+  const [prev, setPrev] = useState(false);
   const openState = useMemo(
     () => (defaultOpen ? { open: true } : {}),
     [defaultOpen]
@@ -268,13 +269,15 @@ const MenuOptions = ({
                         key={sidebarOptions.id}
                         className="md:w-[320px] w-full"
                       >
-                        <Link
-                          href={sidebarOptions.link}
-                          className="flex items-center gap-2 hover:bg-transparent rounded-md transition-all md:w-full w-[320px]"
-                        >
-                          {val}
-                          <span className="">{sidebarOptions.name}</span>
-                        </Link>
+                        <SheetClose asChild>
+                          <Link
+                            href={sidebarOptions.link}
+                            className="flex items-center gap-2 hover:bg-transparent rounded-md transition-all md:w-full w-[320px]"
+                          >
+                            {val}
+                            <span className="">{sidebarOptions.name}</span>
+                          </Link>
+                        </SheetClose>
                       </CommandItem>
                     );
                   })}

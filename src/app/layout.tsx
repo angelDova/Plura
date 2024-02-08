@@ -5,7 +5,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
 import { ThemeProvider } from "@/providers/theme-provider";
 // import ModalProvider from "@/providers/modal-provider";
-import { Toaster } from "@/components/ui/toaster";
+import { Toaster } from "sonner";
 import { Toaster as SonnarToaster } from "@/components/ui/sonner";
 import ModalProvider from "@/providers/modal-provider";
 
@@ -32,7 +32,7 @@ export default function RootLayout({
         >
           <ModalProvider>
             {children}
-            <Toaster />
+            <Toaster richColors />
             <SonnarToaster position="bottom-left" />
           </ModalProvider>
         </ThemeProvider>

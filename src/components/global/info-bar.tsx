@@ -118,8 +118,8 @@ const InfoBar = ({ notifications, subAccountId, className, role }: Props) => {
               )}
               {allNotifications?.length === 0 && (
                 <div
-                  className="flex items-center justify-center text-muted-foreground"
-                  mb-4
+                  className="flex items-center justify-center text-muted-foreground
+                  mb-4"
                 >
                   You have no notifications
                 </div>

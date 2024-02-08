@@ -8,6 +8,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "../ui/dialog";
+import BlurPage from "./blur-page";
 
 type Props = {
   title: string;
