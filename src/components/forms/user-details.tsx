@@ -25,7 +25,17 @@ import {
   CardHeader,
   CardTitle,
 } from "../ui/card";
-import { Form } from "../ui/form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "../ui/form";
+import FileUpload from "../global/file-upload";
+import { Input } from "../ui/input";
+import { Select, SelectTrigger } from "../ui/select";
 
 type Props = {
   id: string | null;
@@ -133,10 +143,93 @@ const UserDetails = ({ id, type, userData, subAccounts }: Props) => {
       </CardHeader>
       <CardContent>
         <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-4"
-          ></form>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+            <FormField
+              disabled={form.formState.isSubmitting}
+              control={form.control}
+              name="avatarUrl"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Profile picture</FormLabel>
+                  <FormControl>
+                    <FileUpload
+                      apiEndpoint="avatar"
+                      value={field.value}
+                      onChange={field.onChange}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              disabled={form.formState.isSubmitting}
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem className="flex-1">
+                  <FormLabel>User full name</FormLabel>
+                  <FormControl>
+                    <Input required placeholder="Full Name" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              disabled={form.formState.isSubmitting}
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem className="flex-1">
+                  <FormLabel>Email</FormLabel>
+                  <FormControl>
+                    <Input
+                      readOnly={
+                        userData?.role === "AGENCY_OWNER" ||
+                        form.formState.isSubmitting
+                      }
+                      placeholder="Email"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              disabled={form.formState.isSubmitting}
+              control={form.control}
+              name="role"
+              render={({ field }) => (
+                <FormItem className="flex-1">
+                  <FormLabel>User Role</FormLabel>
+                  <Select
+                    disabled={form.formState.isSubmitting}
+                    onValueChange={(value) => {
+                      if (
+                        value === "SUBACCOUNT_USER" ||
+                        value === "SUBACCOUNT_GUEST"
+                      ) {
+                        setRoleState(
+                          "You need to have subaccounts to assign Subaccount access to team members."
+                        );
+                      } else {
+                        setRoleState("");
+                      }
+                      field.onChange(value);
+                    }}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger></SelectTrigger>
+                    </FormControl>
+                  </Select>
+                </FormItem>
+              )}
+            ></FormField>
+          </form>
         </Form>
       </CardContent>
     </Card>
