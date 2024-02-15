@@ -1,5 +1,6 @@
 import { FileIcon, X } from "lucide-react";
 import Image from "next/image";
+import React from "react";
 import { Button } from "../ui/button";
 import { UploadDropzone } from "@/lib/uploadthing";
 
@@ -30,26 +31,24 @@ const FileUpload = ({ apiEndpoint, onChange, value }: Props) => {
             <a
               href={value}
               target="_blank"
-              rel="nonopener_noreferrer"
-              className="ml-2 text-s, text-indigo-500 dark:text-indigo-400 hover:underline"
+              rel="noopener_noreferrer"
+              className="ml-2 text-sm text-indigo-500 dark:text-indigo-400 hover:underline"
             >
               View PDF
             </a>
           </div>
         )}
         <Button
+          className="my-2"
           onClick={() => onChange("")}
-          variant={"ghost"}
+          variant="destructive"
           type="button"
-          size={"icon"}
         >
-          <X className="h-4 w-4" />
-          Remove Logo
+          Delete Logo
         </Button>
       </div>
     );
   }
-
   return (
     <div className="w-full bg-muted/30">
       <UploadDropzone

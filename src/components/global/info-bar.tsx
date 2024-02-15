@@ -35,10 +35,8 @@ const InfoBar = ({ notifications, subAccountId, className, role }: Props) => {
     } else {
       if (notifications?.length !== 0) {
         setAllNotifications(
-          notifications?.filter(
-            (item: { subAccountId: string | undefined }) =>
-              item.subAccountId === subAccountId
-          ) ?? []
+          notifications?.filter((item) => item.subAccountId === subAccountId) ??
+            []
         );
       }
     }
@@ -73,53 +71,44 @@ const InfoBar = ({ notifications, subAccountId, className, role }: Props) => {
                   )}
                 </SheetDescription>
               </SheetHeader>
-              {allNotifications?.map(
-                (notification: {
-                  id: React.Key | null | undefined;
-                  User: { avatarUrl: string | undefined; name: string };
-                  notification: string;
-                  createdAt: string | number | Date;
-                }) => (
-                  <div
-                    key={notification.id}
-                    className="flex flex-col gap-y-2 mb-2 overflow-x-scroll text-ellipsis"
-                  >
-                    <div className="flex gap-2">
-                      <Avatar>
-                        <AvatarImage
-                          src={notification.User.avatarUrl}
-                          alt="Profile Picture"
-                        />
-                        <AvatarFallback className="bg-primary">
-                          {notification.User.name.slice(0, 2).toUpperCase()}
-                        </AvatarFallback>
-                      </Avatar>
-                      <div className="flex flex-col">
-                        <p>
-                          <span className="font-bold">
-                            {notification.notification.split("|")[0]}
-                          </span>
-                          <span className="text-muted-foreground">
-                            {notification.notification.split("|")[1]}
-                          </span>
-                          <span className="font-bold">
-                            {notification.notification.split("|")[2]}
-                          </span>
-                        </p>
-                        <small className="text-xs text-muted-foreground">
-                          {new Date(
-                            notification.createdAt
-                          ).toLocaleDateString()}
-                        </small>
-                      </div>
+              {allNotifications?.map((notification) => (
+                <div
+                  key={notification.id}
+                  className="flex flex-col gap-y-2 mb-2 overflow-x-scroll text-ellipsis"
+                >
+                  <div className="flex gap-2">
+                    <Avatar>
+                      <AvatarImage
+                        src={notification.User.avatarUrl}
+                        alt="Profile Picture"
+                      />
+                      <AvatarFallback className="bg-primary">
+                        {notification.User.name.slice(0, 2).toUpperCase()}
+                      </AvatarFallback>
+                    </Avatar>
+                    <div className="flex flex-col">
+                      <p>
+                        <span className="font-bold">
+                          {notification.notification.split("|")[0]}
+                        </span>
+                        <span className="text-muted-foreground">
+                          {notification.notification.split("|")[1]}
+                        </span>
+                        <span className="font-bold">
+                          {notification.notification.split("|")[2]}
+                        </span>
+                      </p>
+                      <small className="text-xs text-muted-foreground">
+                        {new Date(notification.createdAt).toLocaleDateString()}
+                      </small>
                     </div>
                   </div>
-                )
-              )}
+                </div>
+              ))}
               {allNotifications?.length === 0 && (
                 <div
-                  className="flex items-center justify-center text-muted-foreground
-                  mb-4"
+                  className="flex items-center justify-center text-muted-foreground"
+                  mb-4
                 >
                   You have no notifications
                 </div>

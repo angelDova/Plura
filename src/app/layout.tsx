@@ -33,7 +33,6 @@ export default function RootLayout({
           <ModalProvider>
             {children}
             <Toaster richColors />
-            <SonnarToaster position="bottom-left" />
           </ModalProvider>
         </ThemeProvider>
       </body>
