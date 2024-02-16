@@ -8,8 +8,9 @@ import {
   Ticket,
   User,
 } from "@prisma/client";
-import { getAuthUserDetails, getUserPermissions } from "./queries";
+import { getAuthUserDetails, getMedia, getUserPermissions } from "./queries";
 import { db } from "./db";
+import { z } from "zod";
 
 export type NotificationWithUser =
   | ({
@@ -51,3 +52,14 @@ export type UsersWithAgencySubAccountPermissionsSidebarOptions =
   >;
 
 export type GetMediaFiles = Prisma.PromiseReturnType<typeof getMedia>;
+
+export type CreateMediaType = Prisma.MediaCreateWithoutSubaccountInput;
+
+export type UpsertFunnelPage = Prisma.FunnelPageCreateWithoutFunnelInput;
+
+export const CreateFunnelFormSchema = z.object({
+  name: z.string().min(1),
+  description: z.string(),
+  subDomainName: z.string().optional(),
+  favicon: z.string().optional(),
+});
