@@ -49,3 +49,5 @@ export type UsersWithAgencySubAccountPermissionsSidebarOptions =
   Prisma.PromiseReturnType<
     typeof __getUsersWithAgencySubAccountPermissionsSidebarOptions
   >;
+
+export type GetMediaFiles = Prisma.PromiseReturnType<typeof getMedia>;
