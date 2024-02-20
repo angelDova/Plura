@@ -475,7 +475,7 @@ export const sendInvitation = async (
   email: string,
   agencyId: string
 ) => {
-  const resposne = await db.invitation.create({
+  const response = await db.invitation.create({
     data: { email, agencyId, role },
   });
 
@@ -493,7 +493,7 @@ export const sendInvitation = async (
     throw error;
   }
 
-  return resposne;
+  return response;
 };
 
 export const getMedia = async (subaccountId: string) => {
