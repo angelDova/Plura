@@ -1,5 +1,4 @@
 "use client";
-
 import CreatePipelineForm from "@/components/forms/create-pipeline-form";
 import CustomModal from "@/components/global/custom-modal";
 import { Button } from "@/components/ui/button";
@@ -27,7 +26,7 @@ type Props = {
   pipelineId: string;
 };
 
-const PipelineInfoBar = ({ subAccountId, pipelineId, pipelines }: Props) => {
+const PipelineInfoBar = ({ pipelineId, pipelines, subAccountId }: Props) => {
   const { setOpen: setOpenModal, setClose } = useModal();
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState(pipelineId);
@@ -44,12 +43,12 @@ const PipelineInfoBar = ({ subAccountId, pipelineId, pipelines }: Props) => {
   };
 
   return (
-    <div className="">
+    <div>
       <div className="flex items-end gap-2">
         <Popover open={open} onOpenChange={setOpen}>
           <PopoverTrigger asChild>
             <Button
-              variant={"outline"}
+              variant="outline"
               role="combobox"
               aria-expanded={open}
               className="w-[200px] justify-between"

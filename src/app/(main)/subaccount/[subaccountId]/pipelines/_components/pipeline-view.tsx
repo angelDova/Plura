@@ -154,7 +154,7 @@ const PipelineView = ({
         >
           {(provided: any) => (
             <div
-              className="flex item-center gap-x-2"
+              className="flex item-center gap-x-2 overflow-x-scroll"
               {...provided.droppableProps}
               ref={provided.innerRef}
             >
