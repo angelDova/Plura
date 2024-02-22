@@ -19,6 +19,7 @@ import {
 } from "./queries";
 import { db } from "./db";
 import { z } from "zod";
+import Stripe from "stripe";
 
 // import Stripe from "stripe";
 
@@ -142,7 +143,7 @@ export type StripeCustomerType = {
   address: Address;
 };
 
-// export type PricesList = Stripe.ApiList<Stripe.Price>;
+export type PricesList = Stripe.ApiList<Stripe.Price>;
 
 export type FunnelsForSubAccount = Prisma.PromiseReturnType<
   typeof getFunnels
