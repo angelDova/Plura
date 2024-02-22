@@ -111,7 +111,7 @@ const PipelineView = ({
         } else {
           const [currentTicket] = originLane.Tickets.splice(source.index, 1);
 
-          originLane.Tickets.forEach((ticket: { order: any }, idx: any) => {
+          originLane.Tickets.forEach((ticket: any, idx: any) => {
             ticket.order = idx;
           });
 
@@ -120,11 +120,9 @@ const PipelineView = ({
             laneId: destination.droppableId,
           });
 
-          destinationLane.Tickets.forEach(
-            (ticket: { order: any }, idx: any) => {
-              ticket.order = idx;
-            }
-          );
+          destinationLane.Tickets.forEach((ticket: any, idx: any) => {
+            ticket.order = idx;
+          });
           setAllLanes(newLanes);
           updateTicketsOrder([
             ...destinationLane.Tickets,

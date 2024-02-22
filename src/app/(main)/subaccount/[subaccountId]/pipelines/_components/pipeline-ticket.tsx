@@ -34,7 +34,7 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
-import { toast } from "@/components/ui/use-toast";
+import { toast } from "sonner";
 import { deleteTicket, saveActivityLogsNotification } from "@/lib/queries";
 import { TicketWithTags } from "@/lib/types";
 import { useModal } from "@/providers/modal-provider";
@@ -93,10 +93,7 @@ const PipelineTicket = ({
         tickets.filter((t: any) => t.id !== ticket.id)
       );
       const response = await deleteTicket(ticket.id);
-      toast({
-        title: "Deleted",
-        description: "Deleted ticket from lane.",
-      });
+      toast.success("Deleted ticket from lane.");
 
       await saveActivityLogsNotification({
         agencyId: undefined,
@@ -106,11 +103,7 @@ const PipelineTicket = ({
 
       router.refresh();
     } catch (error) {
-      toast({
-        variant: "destructive",
-        title: "Oppse!",
-        description: "Could not delete the ticket.",
-      });
+      toast.error("Could not delete the ticket.");
       console.log(error);
     }
   };

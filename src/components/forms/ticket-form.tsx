@@ -16,7 +16,14 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
-import { Form, FormControl, FormField, FormItem, FormLabel } from "../ui/form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "../ui/form";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import {
@@ -27,7 +34,7 @@ import {
   SelectValue,
 } from "../ui/select";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import { CheckIcon, ChevronsUpDownIcon, User2 } from "lucide-react";
+import { CheckIcon, ChevronsUpDownIcon, Loader2, User2 } from "lucide-react";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Button } from "../ui/button";
 import {
@@ -168,6 +175,20 @@ const TicketForm = ({ laneId, subaccountId, getNewTicket }: Props) => {
                 </FormItem>
               )}
             />
+            <FormField
+              disabled={isLoading}
+              control={form.control}
+              name="value"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Ticket Price</FormLabel>
+                  <FormControl>
+                    <Input placeholder="100.00" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
             <h3 className="">Add Tags</h3>
             <TagCreator
               subAccountId={subaccountId}
@@ -274,7 +295,11 @@ const TicketForm = ({ laneId, subaccountId, getNewTicket }: Props) => {
               </PopoverContent>
             </Popover>
             <Button className="w-20 mt-4" disabled={isLoading} type="submit">
-              {form.formState.isSubmitting ? <Loading /> : "Save"}
+              {form.formState.isSubmitting ? (
+                <Loader2 className="animate-spin" />
+              ) : (
+                "Save"
+              )}
             </Button>
           </form>
         </Form>
