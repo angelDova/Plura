@@ -49,9 +49,12 @@ export default function Home() {
             //WIP: Wire up free product from stripe
             <Card
               key={card.title}
-              className={clsx("w-[300px] flex flex-col justify-between", {
-                "border-2 border-primary": card.title === "Unlimited Saas",
-              })}
+              className={clsx(
+                "w-[300px] flex flex-col justify-between border-2 hover:border-primary transition duration-500 ease-in-out",
+                {
+                  "": card.title === "Unlimited Saas",
+                }
+              )}
             >
               <CardHeader>
                 <CardTitle

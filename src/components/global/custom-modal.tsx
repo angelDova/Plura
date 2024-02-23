@@ -1,5 +1,6 @@
 "use client";
 
+import { AnimatePresence, motion } from "framer-motion";
 import { useModal } from "@/providers/modal-provider";
 import {
   Dialog,

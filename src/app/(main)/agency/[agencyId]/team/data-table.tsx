@@ -3,6 +3,7 @@
 import CustomModal from "@/components/global/custom-modal";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Separator } from "@/components/ui/separator";
 import {
   Table,
   TableBody,
@@ -46,6 +47,8 @@ export default function DataTable<TData, TValue>({
 
   return (
     <>
+      <h1 className="text-4xl p-4">Team</h1>
+      <Separator className="mb-6" />
       <div className="flex items-center justify-between">
         <div className="flex items-center py-4 gap-2">
           <Search />

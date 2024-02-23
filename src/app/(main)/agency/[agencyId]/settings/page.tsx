@@ -1,5 +1,6 @@
 import AgencyDetails from "@/components/forms/agency-details";
 import UserDetails from "@/components/forms/user-details";
+import { Separator } from "@/components/ui/separator";
 import { db } from "@/lib/db";
 import { currentUser } from "@clerk/nextjs";
 
@@ -32,15 +33,19 @@ const SettingsPage = async ({ params }: Props) => {
   const subAccounts = agencyDetails.SubAccount;
 
   return (
-    <div className="flex flex-col lg:!flex-row gap-4">
-      <AgencyDetails data={agencyDetails} />
-      <UserDetails
-        type="agency"
-        id={params.agencyId}
-        subAccounts={subAccounts}
-        userData={userDetails}
-      />
-    </div>
+    <>
+      <h1 className="text-4xl p-4">Settings</h1>
+      <Separator className="mb-6" />
+      <div className="flex flex-col lg:!flex-row gap-4">
+        <AgencyDetails data={agencyDetails} />
+        <UserDetails
+          type="agency"
+          id={params.agencyId}
+          subAccounts={subAccounts}
+          userData={userDetails}
+        />
+      </div>
+    </>
   );
 };
 
