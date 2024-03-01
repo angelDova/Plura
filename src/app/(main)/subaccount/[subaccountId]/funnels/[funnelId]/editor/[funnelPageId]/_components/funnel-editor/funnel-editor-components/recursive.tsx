@@ -2,11 +2,11 @@ import { EditorElement } from "@/providers/editor/editor-provider";
 import React from "react";
 
 import Container from "./container";
-import VideoComponent from "./video";
 import LinkComponent from "./link-component";
-import ContactFormComponent from "./contact-form-component";
 import Checkout from "./checkout";
 import TextComponent from "./text";
+import ContactFormComponent from "./contact-form-component";
+import VideoComponent from "./video";
 
 type Props = {
   element: EditorElement;

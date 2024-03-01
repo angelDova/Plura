@@ -6,6 +6,7 @@ import { useEditor } from "@/providers/editor/editor-provider";
 import clsx from "clsx";
 import { EyeOff } from "lucide-react";
 import React, { useEffect } from "react";
+import Recursive from "./funnel-editor-components/recursive";
 
 type Props = { funnelPageId: string; liveMode?: boolean };
 
@@ -73,10 +74,10 @@ const FunnelEditor = ({ funnelPageId, liveMode }: Props) => {
           <EyeOff />
         </Button>
       )}
-      {/* {Array.isArray(state.editor.elements) &&
+      {Array.isArray(state.editor.elements) &&
         state.editor.elements.map((childElement) => (
           <Recursive key={childElement.id} element={childElement} />
-        ))} */}
+        ))}
     </div>
   );
 };
