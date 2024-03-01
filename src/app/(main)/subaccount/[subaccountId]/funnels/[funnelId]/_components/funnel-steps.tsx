@@ -4,7 +4,7 @@ import CustomModal from "@/components/global/custom-modal";
 import { AlertDialog } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { toast } from "@/components/ui/use-toast";
+import { toast } from "sonner";
 import { upsertFunnelPage } from "@/lib/queries";
 import { FunnelsForSubAccount } from "@/lib/types";
 import { useModal } from "@/providers/modal-provider";
@@ -81,19 +81,12 @@ const FunnelSteps = ({ funnel, funnelId, pages, subaccountId }: Props) => {
         );
       } catch (error) {
         console.log(error);
-        toast({
-          variant: "destructive",
-          title: "Failed",
-          description: "Could not save page order",
-        });
+        toast.error("Could not save page order");
         return;
       }
     });
 
-    toast({
-      title: "Success",
-      description: "Saved page order",
-    });
+    toast.success("Saved page order");
   };
 
   return (

@@ -21,8 +21,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "../ui/input";
 
 import { Button } from "../ui/button";
-import Loading from "../global/loading";
-
 import { FunnelPage } from "@prisma/client";
 import { FunnelPageSchema } from "@/lib/types";
 import {
@@ -35,6 +33,7 @@ import { useRouter } from "next/navigation";
 import { v4 } from "uuid";
 import { CopyPlusIcon, Loader2, Trash } from "lucide-react";
 import { toast } from "sonner";
+import { useModal } from "@/providers/modal-provider";
 
 interface CreateFunnelPageProps {
   defaultData?: FunnelPage;
@@ -49,6 +48,7 @@ const CreateFunnelPage: React.FC<CreateFunnelPageProps> = ({
   order,
   subaccountId,
 }) => {
+  const { setClose } = useModal();
   const router = useRouter();
   //ch
   const form = useForm<z.infer<typeof FunnelPageSchema>>({
@@ -96,6 +96,11 @@ const CreateFunnelPage: React.FC<CreateFunnelPageProps> = ({
       console.log(error);
       toast.error("Could Not Save Funnel Page Details");
     }
+  };
+
+  const savePageClose = () => {
+    setClose();
+    router.refresh();
   };
 
   return (
@@ -150,8 +155,13 @@ const CreateFunnelPage: React.FC<CreateFunnelPageProps> = ({
                 className="w-22 self-end"
                 disabled={form.formState.isSubmitting}
                 type="submit"
+                onClick={savePageClose}
               >
-                {form.formState.isSubmitting ? <Loading /> : "Save Page"}
+                {form.formState.isSubmitting ? (
+                  <Loader2 className="animate-spin" />
+                ) : (
+                  "Save Page"
+                )}
               </Button>
 
               {defaultData?.id && (
@@ -167,6 +177,7 @@ const CreateFunnelPage: React.FC<CreateFunnelPageProps> = ({
                       description: `Deleted a funnel page | ${response?.name}`,
                       subaccountId: subaccountId,
                     });
+                    toast.success("Deleted a funnel page");
                     router.refresh();
                   }}
                 >
