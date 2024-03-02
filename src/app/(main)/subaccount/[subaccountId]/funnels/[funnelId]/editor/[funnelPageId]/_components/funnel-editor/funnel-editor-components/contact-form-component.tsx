@@ -69,7 +69,12 @@ const ContactFormComponent = (props: Props) => {
   const onFormSubmit = async (
     values: z.infer<typeof ContactUserFormSchema>
   ) => {
-    if (!state.editor.liveMode) return;
+    if (!state.editor.liveMode || state.editor.previewMode) {
+      toast.error(
+        "Could not submit form. You are either not in liveMode or you are in previewMode"
+      );
+      return;
+    }
 
     try {
       const response = await upsertContact({

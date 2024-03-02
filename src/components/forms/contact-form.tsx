@@ -21,6 +21,7 @@ import {
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import Loading from "../global/loading";
+import { Loader2 } from "lucide-react";
 
 type Props = {
   title: string;
@@ -82,7 +83,11 @@ const ContactForm = ({ apiCall, subTitle, title }: Props) => {
               )}
             />
             <Button className="mt-4" disabled={isLoading} type="submit">
-              {form.formState.isSubmitting ? <Loading /> : "Get a free quote!"}
+              {form.formState.isSubmitting ? (
+                <Loader2 className="animate-spin" />
+              ) : (
+                "Get a free quote!"
+              )}
             </Button>
           </form>
         </Form>

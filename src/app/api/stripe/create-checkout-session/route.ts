@@ -32,12 +32,12 @@ export async function POST(req: Request) {
   // const agencyIdConnectedAccountId = await db.subAccount.findUnique({
   //   where: { id: subaccountId },
   //   include: { Agency: true },
-  // })
+  // });
 
   const subscriptionPriceExists = prices.find((price) => price.recurring);
   // if (!agencyIdConnectedAccountId?.Agency.connectAccountId) {
-  //   console.log('Agency is not connected')
-  //   return NextResponse.json({ error: 'Agency account is not connected' })
+  //   console.log("Agency is not connected");
+  //   return NextResponse.json({ error: "Agency account is not connected" });
   // }
 
   try {
